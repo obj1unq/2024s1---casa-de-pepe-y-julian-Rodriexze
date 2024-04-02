@@ -7,3 +7,8 @@ test "se rompe algo de la casa de valor 1000 y la casa tiene viveres suficinetes
 	assert.that(casaDePepeYJulian.hayQueHacerReparaciones())
 	assert.notThat(casaDePepeYJulian.estaEnOrdenLaCasa())
 }
+
+test "depositar en cuneta con gasto 1000 deberia sumar a la cuenta corriente con gasto 980. 20 es elcosto por deposito" {
+	casaDePepeYJulian.depositarCCG(1000)
+	assert.equals(980, casaDePepeYJulian.cuentaConGasto())
+}

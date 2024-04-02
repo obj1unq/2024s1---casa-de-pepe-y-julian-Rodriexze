@@ -3,17 +3,34 @@ object casaDePepeYJulian {
 	var viveres = 50
 	var monto = 0
 	var reparaciones = 0
-	var cuentaCorriente = 0
-	var cuentaConGasto = 0
+	var cuentaCorriente = 0 //secundaria
+	var cuentaConGasto = 0 //primaria
+	var cuentaCombinada = 0
 	
-	method depositar(sueldo){
-		cuentaCorriente += sueldo
+	method cuentaCombinada(){
+		return cuentaConGasto + cuentaCorriente
+	}
+	
+	method depositarCC(sueldo){
+		cuentaCorriente += sueldo 
+	}
+	
+	method depositarCCG(sueldo){
 		cuentaConGasto += (sueldo - self.costoPorOperacion())
 	}
 	
-	method gastar(cantidad, cuenta){
-		cuenta -= cantidad
+	method cuentaCorriente() {
+		return cuentaCorriente
 	}
+	
+	method cuentaConGasto() {
+		return cuentaConGasto
+	}
+	
+	method gastar(cantidad){ 
+		return if (cuentaConGasto >= cantidad) {cuentaConGasto -= cantidad} //creo que es asi, elige dependiendo del saldo disponible
+			else {cuentaCorriente -= cantidad}
+	} 
 	
 	method costoPorOperacion() {
 		return 20
