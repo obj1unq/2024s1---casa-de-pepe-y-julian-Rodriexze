@@ -11,8 +11,8 @@ object casaDePepeYJulian {
 		return cuentaConGasto + cuentaCorriente
 	}
 	
-	method depositarCC(sueldo){
-		cuentaCorriente += sueldo 
+	method depositarCC(sueldo){ //cuenta debe ser un objeto
+		cuentaCorriente += sueldo //cuenta.depositar
 	}
 	
 	method depositarCCG(sueldo){
