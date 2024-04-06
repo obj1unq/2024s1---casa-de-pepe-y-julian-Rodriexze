@@ -9,6 +9,16 @@ test "se rompe algo de la casa de valor 1000 y la casa tiene viveres suficinetes
 }
 
 test "depositar en cuneta con gasto 1000 deberia sumar a la cuenta corriente con gasto 980. 20 es elcosto por deposito" {
-	casaDePepeYJulian.depositarCCG(1000)
-	assert.equals(980, casaDePepeYJulian.cuentaConGasto())
+	cuentas.depositarSecundaria(1000)
+	assert.equals(980, cuentas.cuentaConGastoPrincipal()) // falla por que en la primer parte cuesta 20 el costo por operacion y mas abajo pide que salga 50
 }
+
+test " * Se depositan 100 pesos en la cuenta combinada (van a la cuenta con gastos, porque es la primaria, depositándose 50 pesos efectivos).
+	   * Si se extraen 200 pesos (salen de la cuenta corriente, ya que a la primaria no le alcanza, dejándola en 300 pesos).
+	   * Verificar que el saldo de la cuenta con gastos queda en 50 pesos, la cuenta corriente con 300 pesos y la combindada con 350 pesos." {
+		cuentas.depositarCuentaCombinada(100)
+		assert.equals(50, cuentas.cuentaConGastoPrincipal())
+		cuentas.extraer(200)
+		assert.equals(300, cuentas.cuentaCorrienteSecundaria())
+		assert.equals(50, cuentas.cuentaConGastoPrincipal())
+	}
